@@ -1,28 +1,28 @@
 import Expo from 'expo';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Navigator } from 'react-native';
+
+import FetchApi from './components/FetchApi';
+import DetailView from './components/DetailView';
 
 class App extends React.Component {
-    render() { 
-        return ( <View style = { styles.container }>
-            <Text style = { styles.hello } > 
-                TEST 
-            </Text> 
-            </View>
+    renderScene(route, navigator) {
+        switch (route.id) {
+            case 'nodelist':
+                return (<FetchApi navigator={navigator} title="nodelist" />)
+            case 'nodedetails':
+                return (<DetailView user={route.user} navigator={navigator} title="nodedetails" />)
+        }
+    }
+    render() {
+        return (
+            <Navigator
+                initialRoute={{ id: 'nodelist' }}
+                renderScene={this.renderScene}
+                configureScreen={(route, routeStack) => Navigator.SceneConfigs.FloatFromBottom}
+            />
         );
     }
 }
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#ccc',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    hello: {
-        color: '#666',
-        fontSize: 20,
-    },
-});
 
 Expo.registerRootComponent(App);
