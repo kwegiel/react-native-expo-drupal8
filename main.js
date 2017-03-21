@@ -11,7 +11,7 @@ class App extends React.Component {
             case 'nodelist':
                 return (<FetchApi navigator={navigator} title="nodelist" />)
             case 'nodedetails':
-                return (<DetailView user={route.user} navigator={navigator} title="nodedetails" />)
+                return (<DetailView node={route.nid} navigator={navigator} title="nodedetails" />)
         }
     }
     render() {

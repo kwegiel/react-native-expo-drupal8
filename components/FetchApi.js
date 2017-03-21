@@ -15,7 +15,7 @@ export default class FetchApi extends Component{
     }
 
     fetchApi(){
-        fetch('https://jsonplaceholder.typicode.com/posts')
+        fetch('https://api.wegiel.net/v1/ogloszenia')
             .then((response) => response.json())
             .then((response) => {
                 this.setState({
@@ -26,9 +26,8 @@ export default class FetchApi extends Component{
 
     onPress(node){
         this.props.navigator.push({
-            id: 'nodedetails',
-            title: node.title,
-            body: node.body
+            id: 'nodedetails',            
+            nid: node
         });
     }
 
@@ -36,7 +35,7 @@ export default class FetchApi extends Component{
         return(
             <TouchableHighlight onPress={() => {this.onPress(node)}}>
             <View style={styles.row}>
-                <Text style={styles.rowText}>{node.title}</Text>
+                <Text style={styles.rowText}>{node.nid} - {node.title}</Text>
             </View>
             </TouchableHighlight>
         )
